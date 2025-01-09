@@ -1,8 +1,3 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -27,50 +22,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000
-  },
-  {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8',
-      dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
---      "3rd/image.nvim", 
-    }
-  }
-}
-local opts = {}
-
 -- Setup lazy.nvim
-require("lazy").setup(plugins,opts)
-
--- color scheme setup
-vim.cmd.colorscheme "catppuccin"
-
--- telescope setup
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-
-
-local configs = require("nvim-treesitter.configs")
-configs.setup({
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "typescript", "html" },
-  sync_install = false,
-  highlight = { enable = true },
-  indent = { enable = true },  
-})
-
-
--- Setup neotree
-vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>', {})
+require("lazy").setup("plugins")
+require("vim-options")
